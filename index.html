@@ -1,420 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Kristal Brent Zook | Author & Journalist</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- CSS VARIABLES: Warm, Tactile Palette --- */
-        :root {
-            --bg-parchment: #FDFBF7;
-            --text-ink: #2C2A29;
-            --accent-saffron: #D9822B;
-            --accent-saffron-muted: #EAD0A8;
-            --shadow-soft: rgba(44, 42, 41, 0.08);
-            --shadow-deep: rgba(44, 42, 41, 0.15);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚡ FLEX // Anti-Boring Hyper-Real Estate</title>
 
-        /* --- CSS RESET & BASE STYLES --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
 
-        body {
-            background-color: var(--bg-parchment);
-            color: var(--text-ink);
-            font-family: 'Lora', Georgia, serif;
-            line-height: 1.7;
-            /* Subtle CSS micro-grain effect to feel like paper */
-            background-image: radial-gradient(rgba(0,0,0,0.01) 1px, transparent 0);
-            background-size: 4px 4px;
-            overflow-x: hidden;
-        }
+  <style>
+    :root {
+      --bg: #050505;
+      --fg: #ffffff;
+      --accent: #ff3e3e;
+      --muted: #77777d;
+      --font-display: "Space Grotesk", sans-serif;
+      --font-accent: "Syne", sans-serif;
+      --font-body: "Plus Jakarta Sans", sans-serif;
+    }
 
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        a {
-            color: var(--text-ink);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* --- THE RIBBON BOOKMARK NAVIGATION --- */
-        header {
-            position: fixed;
-            top: 0;
-            right: 10%;
-            z-index: 1000;
-        }
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
 
-        .bookmark-nav {
-            background: var(--accent-saffron);
-            padding: 25px 20px 45px 20px;
-            box-shadow: 2px 4px 15px var(--shadow-deep);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+    a,
+    button,
+    .luxury-row {
+      cursor: none;
+    }
 
-        .bookmark-nav:hover {
-            transform: translateY(5px);
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
 
-        .bookmark-nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            text-align: center;
-        }
+    #ball {
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease;
+    }
 
-        .bookmark-nav a {
-            color: #FFF;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
+    #ball-outline {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s cubic-bezier(0.1, 0.8, 0.3, 1);
+    }
 
-        .bookmark-nav a:hover {
-            opacity: 0.8;
-        }
+    body.is-hovering #ball {
+      width: 82px;
+      height: 82px;
+      background-color: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(6px);
+    }
 
-        /* --- HERO: THE TITLE PAGE --- */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 8% 60px 8%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+    body.is-hovering #ball-outline {
+      transform: translate(-50%, -50%) scale(0);
+    }
 
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
+    #hover-image-preview {
+      position: fixed;
+      width: min(300px, 38vw);
+      height: min(400px, 52vw);
+      border-radius: 18px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.6) rotate(-5deg);
+      transition: opacity 0.4s cubic-bezier(0.2, 1, 0.2, 1), transform 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+    }
 
-        .hero-content {
-            max-width: 650px;
-        }
+    #hover-image-preview.visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1) rotate(3deg);
+    }
 
-        .author-title {
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--accent-saffron);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
+    .grid-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      pointer-events: none;
+      z-index: 2;
+    }
 
-        .hero h2 {
-            font-size: 3.5rem;
-            line-height: 1.15;
-            margin-bottom: 25px;
-        }
+    .grid-line {
+      border-right: 1px solid rgba(255, 255, 255, 0.035);
+      height: 100%;
+    }
 
-        .hero p {
-            font-size: 1.15rem;
-            margin-bottom: 35px;
-            color: rgba(44, 42, 41, 0.85);
-        }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 38px clamp(22px, 4vw, 52px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      mix-blend-mode: difference;
+    }
 
-        /* Handwritten Marginalia Accent */
-        .marginalia {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--accent-saffron);
-            border-left: 2px solid var(--accent-saffron-muted);
-            padding-left: 15px;
-            margin-bottom: 35px;
-        }
+    .logo {
+      font-family: var(--font-accent);
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -1px;
+      text-transform: lowercase;
+    }
 
-        .btn-editorial {
-            display: inline-block;
-            border: 1px solid var(--text-ink);
-            padding: 12px 30px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            background: transparent;
-            cursor: pointer;
-            position: relative;
-            z-index: 1;
-        }
+    .logo span {
+      color: var(--accent);
+    }
 
-        .btn-editorial::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 0; height: 100%;
-            background: var(--text-ink);
-            z-index: -1;
-            transition: width 0.3s ease;
-        }
+    .menu-trigger {
+      font-family: var(--font-accent);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: none;
+      border: none;
+      color: var(--fg);
+    }
 
-        .btn-editorial:hover {
-            color: var(--bg-parchment);
-        }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 8vw 70px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .btn-editorial:hover::after {
-            width: 100%;
-        }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 42vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--accent);
+      filter: blur(110px);
+      opacity: 0.17;
+      right: -10vw;
+      top: 12vh;
+      animation: pulse 6s ease-in-out infinite alternate;
+    }
 
-        /* Tactile Book Graphic */
-        .hero-book-display {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    @keyframes pulse {
+      from { transform: scale(0.9) translateY(0); }
+      to { transform: scale(1.25) translateY(80px); }
+    }
 
-        .book-wrapper {
-            position: relative;
-            perspective: 1000px;
-        }
+    .hero-ticker {
+      font-family: var(--font-accent);
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 4px;
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 5;
+    }
 
-        .book-mockup {
-            width: 320px;
-            height: 480px;
-            background: #e09f3e; /* Placeholder cover base color */
-            background-image: linear-gradient(135deg, #e09f3e 0%, #9e2a2b 100%);
-            box-shadow: 15px 20px 30px var(--shadow-deep);
-            border-radius: 2px 10px 10px 2px;
-            position: relative;
-            transform: rotateY(-15deg) rotateX(5deg);
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            text-align: center;
-            color: #fff;
-        }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.8rem, 11vw, 10.5rem);
+      font-weight: 800;
+      line-height: 0.84;
+      text-transform: uppercase;
+      letter-spacing: -0.075em;
+      position: relative;
+      z-index: 5;
+      max-width: 1100px;
+    }
 
-        /* Shadow simulation of standard book fold edge */
-        .book-mockup::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 10px; width: 3px; height: 100%;
-            background: rgba(0,0,0,0.2);
-            z-index: 2;
-        }
+    .hero h1 span {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--fg);
+      text-stroke: 1.5px var(--fg);
+    }
 
-        .book-wrapper:hover .book-mockup {
-            transform: rotateY(-5deg) rotateX(2deg) scale(1.02);
-            box-shadow: 25px 30px 45px var(--shadow-deep);
-        }
+    .hero-note {
+      margin-top: 34px;
+      max-width: 560px;
+      color: rgba(255, 255, 255, 0.68);
+      line-height: 1.8;
+      position: relative;
+      z-index: 5;
+    }
 
-        .book-mockup h3 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
+    .interactive-list-section {
+      padding: 150px 8vw;
+      background-color: #0b0b0d;
+      position: relative;
+      z-index: 5;
+    }
 
-        .book-mockup p {
-            font-style: italic;
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
+    .section-tag {
+      font-family: var(--font-accent);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 60px;
+      display: block;
+      letter-spacing: 3px;
+    }
 
-        /* --- THE INTERACTIVE BOOKSHELF SECTION --- */
-        .bookshelf-section {
-            padding: 100px 8%;
-            background: #F5F1E9; /* Slightly darker shade of parchment */
-            border-top: 1px solid rgba(44, 42, 41, 0.05);
-            border-bottom: 1px solid rgba(44, 42, 41, 0.05);
-        }
+    .luxury-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+      padding: 42px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      position: relative;
+      transition: padding 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+    }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
+    .luxury-row:hover {
+      padding-left: 34px;
+      border-bottom-color: var(--accent);
+      transform: skewX(-2deg);
+    }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
+    .row-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.15rem, 5.3vw, 5rem);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      transition: color 0.3s ease;
+    }
 
-        .section-header p {
-            font-style: italic;
-            color: rgba(44, 42, 41, 0.6);
-        }
+    .luxury-row:hover .row-title {
+      color: var(--accent);
+    }
 
-        .bookshelf-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            align-items: flex-end;
-            padding-bottom: 15px;
-            border-bottom: 12px solid #2C2A29; /* The literal wooden shelf ledge */
-            box-shadow: 0 10px 15px var(--shadow-soft);
-        }
+    .row-info {
+      font-family: var(--font-accent);
+      color: var(--muted);
+      text-align: right;
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      white-space: nowrap;
+    }
 
-        .shelf-book {
-            width: 180px;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            cursor: pointer;
-            position: relative;
-        }
+    .hype-banner {
+      min-height: 72vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(180deg, #0b0b0d, var(--bg));
+      position: relative;
+      text-align: center;
+      padding: 0 4vw;
+      z-index: 5;
+    }
 
-        /* The human interactive slide-up and shadow transition */
-        .shelf-book:hover {
-            transform: translateY(-30px);
-        }
+    .hype-text {
+      font-family: var(--font-accent);
+      font-size: clamp(1.6rem, 4.4vw, 4rem);
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.045em;
+      max-width: 1050px;
+    }
 
-        .shelf-book-cover {
-            width: 100%;
-            aspect-ratio: 2/3;
-            background: #2C2A29;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 5px 5px 15px var(--shadow-deep);
-            border-radius: 2px 5px 5px 2px;
-        }
+    .highlight {
+      background: linear-gradient(120deg, #ff3e3e, #ff8e3e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        .shelf-book:nth-child(1) .shelf-book-cover { background: #582f0e; }
-        .shelf-book:nth-child(2) .shelf-book-cover { background: #7f5539; }
-        .shelf-book:nth-child(3) .shelf-book-cover { background: #b1a7a6; color: #2C2A29; }
+    footer {
+      padding: 60px 8vw;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-family: var(--font-body);
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      z-index: 5;
+    }
 
-        .shelf-book-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
+    @media (max-width: 800px) {
+      body,
+      a,
+      button,
+      .luxury-row {
+        cursor: auto;
+      }
 
-        .shelf-book-spine-label {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+      #ball,
+      #ball-outline,
+      #hover-image-preview {
+        display: none;
+      }
 
-        /* --- RESPONSIVE WORK --- */
-        @media (max-width: 968px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 50px;
-                text-align: center;
-            }
-            .hero-content {
-                margin: 0 auto;
-            }
-            .marginalia {
-                border-left: none;
-                border-top: 2px solid var(--accent-saffron-muted);
-                border-bottom: 2px solid var(--accent-saffron-muted);
-                padding: 15px 0;
-            }
-            .bookshelf-container {
-                flex-direction: column;
-                align-items: center;
-                border-bottom: none;
-                gap: 50px;
-            }
-            .shelf-book {
-                width: 220px;
-            }
-            .shelf-book:hover {
-                transform: scale(1.05);
-            }
-            header {
-                right: 5%;
-            }
-        }
-    </style>
+      nav {
+        padding: 26px 22px;
+      }
+
+      .menu-trigger {
+        font-size: 0.7rem;
+      }
+
+      .hero {
+        padding-inline: 22px;
+      }
+
+      .hero h1 {
+        letter-spacing: -0.06em;
+      }
+
+      .interactive-list-section {
+        padding: 95px 22px;
+      }
+
+      .luxury-row {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 34px 0;
+      }
+
+      .luxury-row:hover {
+        padding-left: 0;
+        transform: none;
+      }
+
+      .row-info {
+        text-align: left;
+      }
+
+      .hype-banner {
+        padding: 90px 22px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div id="ball"></div>
+  <div id="ball-outline"></div>
+  <div id="hover-image-preview"></div>
 
-    <header>
-        <nav class="bookmark-nav">
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#books">Books</a></li>
-                <li><a href="#journalism">Journalism</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <div class="grid-overlay" aria-hidden="true">
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+  </div>
 
-    <main>
-        <section class="hero" id="about">
-            <div class="hero-grid">
-                <div class="hero-content">
-                    <p class="author-title">Journalist & Author</p>
-                    <h2>Dr. Kristal Brent Zook</h2>
-                    
-                    <p class="marginalia">
-                        "An intimate map of identity, lineage, and truth-telling."
-                    </p>
-                    
-                    <p>
-                        Welcome to a space of storytelling and deep scholarship. As an author and journalist exploring the intersections of race, gender, and structural culture, my life's work centers around elevating essential voices and untangling complex personal truths.
-                    </p>
-                    <a href="#books" class="btn-editorial">Explore the Books</a>
-                </div>
-                
-                <div class="hero-book-display">
-                    <div class="book-wrapper">
-                        <div class="book-mockup">
-                            <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; margin-bottom: 10px;">A New Memoir</p>
-                            <h3>The Girl in the Yellow Poncho</h3>
-                            <p>By Dr. Kristal Brent Zook</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <nav>
+    <div class="logo">elysium<span>.</span></div>
+    <button class="menu-trigger interactive-target" type="button">Menu // Close</button>
+  </nav>
 
-        <section class="bookshelf-section" id="books">
-            <div class="section-header">
-                <h2>The Library</h2>
-                <p>Hover over a volume to pull it from the shelf</p>
-            </div>
+  <section class="hero">
+    <span class="hero-ticker">⚡ Next-Gen Living Concepts Only</span>
+    <h1>We Build<br><span>Unhinged</span><br>Luxury.</h1>
+    <p class="hero-note">
+      A hyper-real estate landing page for brokers, developers, and property brands that refuse to look like another boring listing template.
+    </p>
+  </section>
 
-            <div class="bookshelf-container">
-                <div class="shelf-book">
-                    <div class="shelf-book-cover">
-                        <div class="shelf-book-title">The Girl in the Yellow Poncho</div>
-                    </div>
-                    <div class="shelf-book-spine-label">Memoir</div>
-                </div>
+  <section class="interactive-list-section">
+    <span class="section-tag">[ Hover to reveal the masterpieces ]</span>
 
-                <div class="shelf-book">
-                    <div class="shelf-book-cover">
-                        <div class="shelf-book-title">Black Women's Lives</div>
-                    </div>
-                    <div class="shelf-book-spine-label">Social History</div>
-                </div>
+    <div class="luxury-row interactive-target" data-img="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=85">
+      <div class="row-title">The Cyber Villa</div>
+      <div class="row-info">Kyoto // $14.2M</div>
+    </div>
 
-                <div class="shelf-book">
-                    <div class="shelf-book-cover">
-                        <div class="shelf-book-title">Color by Fox</div>
-                    </div>
-                    <div class="shelf-book-spine-label">Media Criticism</div>
-                </div>
-            </div>
-        </section>
-    </main>
+    <div class="luxury-row interactive-target" data-img="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85">
+      <div class="row-title">Glass Horizon</div>
+      <div class="row-info">Malibu // $28.0M</div>
+    </div>
 
+    <div class="luxury-row interactive-target" data-img="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85">
+      <div class="row-title">Monolith Cube</div>
+      <div class="row-info">Oslo // $9.5M</div>
+    </div>
+
+    <div class="luxury-row interactive-target" data-img="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=85">
+      <div class="row-title">Liquid Mansion</div>
+      <div class="row-info">Miami // $35.1M</div>
+    </div>
+  </section>
+
+  <section class="hype-banner">
+    <div class="hype-text">
+      “If your real estate company doesn't look like an <span class="highlight">avant-garde fashion brand</span>, you're doing it completely wrong.”
+    </div>
+  </section>
+
+  <footer>
+    <div>FLEX ESTATES DESIGN LAB</div>
+    <div>AWWWARDS CHALLENGE // 2026</div>
+  </footer>
+
+  <script>
+    const ball = document.getElementById("ball");
+    const outline = document.getElementById("ball-outline");
+    const imgPreview = document.getElementById("hover-image-preview");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let outlineX = mouseX;
+    let outlineY = mouseY;
+
+    document.addEventListener("mousemove", (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+
+      ball.style.left = `${mouseX}px`;
+      ball.style.top = `${mouseY}px`;
+    });
+
+    function animateOutline() {
+      outlineX += (mouseX - outlineX) * 0.15;
+      outlineY += (mouseY - outlineY) * 0.15;
+
+      outline.style.left = `${outlineX}px`;
+      outline.style.top = `${outlineY}px`;
+
+      if (imgPreview.classList.contains("visible")) {
+        const offsetX = window.innerWidth < 900 ? 0 : 170;
+        imgPreview.style.left = `${mouseX + offsetX}px`;
+        imgPreview.style.top = `${mouseY}px`;
+      }
+
+      requestAnimationFrame(animateOutline);
+    }
+
+    animateOutline();
+
+    const targets = document.querySelectorAll(".interactive-target");
+
+    targets.forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        document.body.classList.add("is-hovering");
+
+        if (item.dataset.img) {
+          imgPreview.style.backgroundImage = `url('${item.dataset.img}')`;
+          imgPreview.classList.add("visible");
+        }
+      });
+
+      item.addEventListener("mouseleave", () => {
+        document.body.classList.remove("is-hovering");
+        imgPreview.classList.remove("visible");
+      });
+    });
+  </script>
 </body>
 </html>
